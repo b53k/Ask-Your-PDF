@@ -1,0 +1,118 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #272727; /* Dark gray background */
+    color: #f8f7f7; /* Light text color for better contrast */
+}
+
+h2 {
+    color: #000000;
+}
+h3 {
+    color: #000000;
+}
+p {
+    line-height: 1.6;
+}
+.mathjax-container {
+    margin-top: 20px;
+}
+
+md-block h1, md-block h2, md-block h3 {
+    color: #2a9df4;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+}
+
+md-block p {
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+#ask-form {
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack the input and button vertically */
+    align-items: center; /* Center the form horizontally */
+    justify-content: center; /* Center the form vertically if needed */
+    margin-top: 20px;
+}
+
+#question {
+    width: 80%; /* Make the input field longer */
+    max-width: 500px; /* Limit the maximum width */
+    padding: 10px; /* Add padding for better appearance */
+    font-size: 16px; /* Adjust font size */
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-radius: 5px; /* Round the corners */
+    margin-bottom: 10px; /* Add space below the input field */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+#ask-form button {
+    padding: 10px 20px; /* Adjust button size */
+    font-size: 16px; /* Adjust font size */
+    background-color: #007BFF; /* Button color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Round button corners */
+    cursor: pointer; /* Add pointer cursor on hover */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+#ask-form button:hover {
+    background-color: #0056b3; /* Darken button color on hover */
+}
+
+#upload-form {
+    display: flex; /* Use flexbox for better alignment */
+    align-items: center; /* Align input and button vertically */
+    gap: 10px; /* Add spacing between input and button */
+    margin-top: 20px; /* Add space above the form */
+}
+
+#upload-form input[type="file"] {
+    font-size: 16px; /* Adjust font size */
+    padding: 8px; /* Add padding for better usability */
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-radius: 5px; /* Round the corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    width: 50%; /* Adjust input width */
+    max-width: 12%; /* Limit the maximum width */
+}
+
+#upload-form button {
+    padding: 10px 20px; /* Adjust button size */
+    font-size: 16px; /* Adjust font size */
+    background-color: #28a745; /* Green button color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Round button corners */
+    cursor: pointer; /* Add pointer cursor on hover */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+#upload-form button:hover {
+    background-color: #218838; /* Darken button color on hover */
+}
+
+/* Spinner styles */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.747); /* Light gray border */
+    border-top: 4px solid #007BFF; /* Blue border on top */
+    border-radius: 50%; /* Make it circular */
+    width: 40px; /* Width of the spinner */
+    height: 40px; /* Height of the spinner */
+    animation: spin 1s linear infinite; /* Add spinning animation */
+    margin: 20px auto; /* Center horizontally */
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

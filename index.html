@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Your PDF</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin: 20px 0;
+        }
+        #upload-status {
+            margin-top: 10px;
+            color: green;
+        }
+        /* Styling for the response box */
+        .response-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9e5e5;
+            border: 1px solid #777777;
+            border-radius: 5px;
+            max-height: 900px; /* Limit the height */
+            overflow-y: auto; /* Add vertical scrolling */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+
+            /* Width Adjustment */
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+
+            /* Override font color */
+            color: #000000; /* Black text color for better readability */
+
+        }
+
+        h1 {
+            text-align: center; /* Center align the heading */
+            color: #fafafa; /* Set the text color to white */
+            margin-bottom: 30px; /* Add spacing below the heading */
+            font-size: 2.5em; /* Adjust font size */
+            font-weight: bold; /* Make the text bold */
+        }
+
+        /* Ensure all heading elements inside the response box are black */
+        .response-box h1,
+        .response-box h2,
+        .response-box h3,
+        .response-box h4,
+        .response-box h5,
+        .response-box h6 {
+            color: #000000; /* Black text color for headings */
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Upload PDF Document and Ask Question Below</h1>
+
+    <!-- File Upload -->
+    <form id="upload-form">
+        <input type="file" id="file" name="file" accept="application/pdf" required>
+        <button type="submit">Upload</button>
+    </form>
+    <p id="upload-status"></p>
+
+    <!-- Question Section -->
+    <form id="ask-form">
+        <input type="text" id="question" name="question" placeholder="Ask a question..." required>
+        <button type="submit">Elucidate</button>
+    </form>
+
+    <!-- Scrollable response box -->
+    <div id="response" class="response-box">
+        <!-- LLM response will appear here -->
+    </div>
+
+    <!-- Spinner -->
+    <div id="spinner" class="spinner" style="display: none;"></div>
+
+    <script>
+        const uploadForm = document.getElementById("upload-form");
+        const askForm = document.getElementById("ask-form");
+        const uploadStatus = document.getElementById("upload-status");
+        const responseElement = document.getElementById("response");
+
+        // Upload Document
+        uploadForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById("file");
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            const res = await fetch("http://127.0.0.1:5000/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await res.json();
+            uploadStatus.innerText = data.message || data.error;
+        });
+
+        // Ask Question
+        askForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const questionInput = document.getElementById("question").value;
+            const spinner = document.getElementById("spinner");
+            const responseElement = document.getElementById("response");
+
+            // Show the spinner
+            spinner.style.display = "block";
+            
+            try {
+
+                const res = await fetch("http://127.0.0.1:5000/ask", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ question: questionInput }),
+                });
+
+                const data = await res.json();
+
+                // Hide the spinner
+                spinner.style.display = "none";
+
+                //responseElement.innerText = data.answer || data.error;
+                console.log("Response Data:", data); // Debugging line
+
+                if (data.answer) {
+                    //const responseElement = document.getElementById("response");
+                    responseElement.innerHTML = data.answer; // Set response as HTML
+                    MathJax.typesetPromise(); // Trigger MathJax to render LaTex
+                } else {
+                    responseElement.innerHTML = `<p style="color:red;">${data.error || "No response received"}</p>`;
+                }
+            } catch (err) {
+                console.error("Error:", err);
+
+                // Hide the spinner and show an error message
+                spinner.style.display = "none";
+                responseElement.innerHTML = `<p style="color:red;">Error occurred while processing the question.</p>`;
+            }         
+        });
+    </script>
+</body>
+</html>
