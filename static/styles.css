@@ -116,3 +116,20 @@ md-block p {
         transform: rotate(360deg);
     }
 }
+
+.social-links {
+    position: absolute; /* Position the div relative to the page */
+    top: 20px; /* Adjust vertical placement */
+    right: 20px; /* Adjust horizontal placement */
+}
+
+.github-logo {
+    width: 100px; /* Adjust size of the logo */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Add a pointer cursor for better UX */
+    transition: transform 0.3s ease; /* Add a hover effect */
+}
+
+.github-logo:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
