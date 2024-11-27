@@ -9,7 +9,6 @@ RAG-powered application for querying PDF documents. Upload a PDF, ask questions,
 **Features**
 * Upload any PDF document and interact with its content by asking questions
 * Renders mathematical equations using `MathJax`
-* Open-source and customizable
 
 <p align='center'>
   <img src="/imgs/rag_pic.png" width="800" height="450"><br>
