@@ -9,14 +9,18 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_core.vectorstores import InMemoryVectorStore
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
 
 
 # Initialize Flask application
 app = Flask(__name__)
 CORS(app)
 
+# Load environment variables form a .env file
+load_dotenv()
+
 # API Key Setup
-api_key = "YOUR OPENAI API KEY"
+api_key = os.getenv("OPENAI_API_KEY")
 os.environ["OPENAI_API_KEY"] = api_key
 
 # Initialize the LLM and settings
