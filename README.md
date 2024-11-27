@@ -48,6 +48,8 @@ Access the application in your browser at: http//127.0.0.1:5000
 2. Ask Questions: Type a question in the input box and click "Elucidate".
 3. View AI-Generated Responses: Answers are displayed in a styled response box with support for MathJax-rendered equations.
 
+Web App: https://query-docs.onrender.com/
+
 <p align='center'>
   <img src="/imgs/demo.png" width="900" height="400"><br>
 </p>
